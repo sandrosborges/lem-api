@@ -1,7 +1,7 @@
 {
-  "name": "lem-api",
+  "name": "meat-api",
   "version": "1.0.0",
-  "description": "Luizalabs Employee Manager api",
+  "description": "API de restaurantes",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,11 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "mongoose": "4.13.9",
     "restify": "6.3.4"
   },
   "devDependencies": {
-    "@types/restify": "5.0.6",
-    "tsc-watch": "^2.2.1",
-    "typescript": "^3.5.2"
+    "@types/mongoose": "4.7.32",
+    "@types/restify": "^7.2.7"
   }
 }
