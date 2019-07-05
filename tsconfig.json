@@ -1,0 +1,11 @@
+{
+  "compilerOptions":{
+    "outDir":"Dist",
+    "target":"es2015",
+    "module":"commonjs",
+    "typeRoots": [
+      "typings/global",
+      "typings/modules"
+    ]
+  }
+}
