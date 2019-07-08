@@ -7,25 +7,29 @@ class EmployeesRouter extends Router {
 
     application.get('/employees', (req, resp, next) => {
       Employee.find().then(employees => {
+        resp.setHeader('Access-Control-Allow-Origin', '*');
         resp.json(employees)
+
         return next()
-      })
+      }).catch(next)
     })
 
     application.get('/employees/:id', (req, resp, next) => {
         Employee.findById(req.params.id).then(employee => {
         if (employee) {
+          resp.setHeader('Access-Control-Allow-Origin', '*');
           resp.json(employee)
           return next()
         }
         resp.send(404)
         return next()
-      })
+      }).catch(next)
     })
 
     application.post('/employees', (req, resp, next) => {
       let employee = new Employee(req.body)
       employee.save().then(employee => {
+        resp.setHeader('Access-Control-Allow-Origin', '*');
         resp.json(employee)
         return next()
       }).catch(next)
@@ -37,13 +41,14 @@ class EmployeesRouter extends Router {
         .exec().then(result => {
           if (result.n) {
             Employee.findById(req.params.id).then(employee => {
+              resp.setHeader('Access-Control-Allow-Origin', '*');
               resp.json(employee)
               return next()
             })
           } else {
             resp.send(404)
           }
-        })
+        }).catch(next)
     })
 
     application.patch('/employees/:id', (req, resp, next) => {
@@ -51,12 +56,13 @@ class EmployeesRouter extends Router {
       Employee.findByIdAndUpdate(req.params.id, req.body, options).then(
         employee => {
           if (employee) {
+            resp.setHeader('Access-Control-Allow-Origin', '*');
             resp.json(employee)
             return next()
           }
           else { resp.send(404) }
         }
-      )
+      ).catch(next)
     })
 
   }
