@@ -11,10 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "mongoose": "4.13.9",
-    "restify": "6.3.4"
+    "restify": "6.3.4",
+    "restify-cors-middleware": "^1.1.1"
   },
   "devDependencies": {
     "@types/mongoose": "4.7.32",
-    "@types/restify": "^7.2.7"
+    "@types/restify": "^7.2.7",
+    "@types/restify-cors-middleware": "^1.0.1"
   }
 }

@@ -2,6 +2,13 @@ import * as restify from 'restify'
 import {environment} from '../common/environment'
 import {Router}  from "../common/router";
 import * as mongoose from 'mongoose'
+import * as corsMiddleware from "restify-cors-middleware";  
+
+const cors = corsMiddleware({  
+  origins: ["*"],
+  allowHeaders: ["Authorization"],
+  exposeHeaders: ["Authorization"]
+})
 
 export class Server {
 
@@ -26,6 +33,10 @@ initializeDB():mongoose.MongooseThenable{
         this.application.use(restify.plugins.queryParser())
         this.application.use(restify.plugins.bodyParser())
 
+        this.application.pre(cors.preflight)
+        this.application.use(cors.actual)
+        
+    
         //routes
         for (let route of routers){
           route.applyRoutes(this.application)

@@ -6,7 +6,6 @@ class EmployeesRouter extends router_1.Router {
     applyRoutes(application) {
         application.get('/employees', (req, resp, next) => {
             employees_model_1.Employee.find().then(employees => {
-                resp.setHeader('Access-Control-Allow-Origin', '*');
                 resp.json(employees);
                 return next();
             }).catch(next);
@@ -14,7 +13,6 @@ class EmployeesRouter extends router_1.Router {
         application.get('/employees/:id', (req, resp, next) => {
             employees_model_1.Employee.findById(req.params.id).then(employee => {
                 if (employee) {
-                    resp.setHeader('Access-Control-Allow-Origin', '*');
                     resp.json(employee);
                     return next();
                 }
@@ -36,7 +34,6 @@ class EmployeesRouter extends router_1.Router {
                 .exec().then(result => {
                 if (result.n) {
                     employees_model_1.Employee.findById(req.params.id).then(employee => {
-                        resp.setHeader('Access-Control-Allow-Origin', '*');
                         resp.json(employee);
                         return next();
                     });
@@ -50,7 +47,6 @@ class EmployeesRouter extends router_1.Router {
             const options = { new: true };
             employees_model_1.Employee.findByIdAndUpdate(req.params.id, req.body, options).then(employee => {
                 if (employee) {
-                    resp.setHeader('Access-Control-Allow-Origin', '*');
                     resp.json(employee);
                     return next();
                 }

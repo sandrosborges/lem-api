@@ -7,7 +7,7 @@ class EmployeesRouter extends Router {
 
     application.get('/employees', (req, resp, next) => {
       Employee.find().then(employees => {
-        resp.setHeader('Access-Control-Allow-Origin', '*');
+
         resp.json(employees)
 
         return next()
@@ -17,7 +17,7 @@ class EmployeesRouter extends Router {
     application.get('/employees/:id', (req, resp, next) => {
         Employee.findById(req.params.id).then(employee => {
         if (employee) {
-          resp.setHeader('Access-Control-Allow-Origin', '*');
+
           resp.json(employee)
           return next()
         }
@@ -35,13 +35,13 @@ class EmployeesRouter extends Router {
       }).catch(next)
     })
 
-    application.put('/employees/:id', (req, resp, next) => {
+    application.put('/employees/:id', (req, resp, next) => {     
+
       const options = { overwrite: true }
       Employee.update({ _id: req.params.id }, req.body, options)
         .exec().then(result => {
           if (result.n) {
-            Employee.findById(req.params.id).then(employee => {
-              resp.setHeader('Access-Control-Allow-Origin', '*');
+            Employee.findById(req.params.id).then(employee => {             
               resp.json(employee)
               return next()
             })
@@ -56,7 +56,6 @@ class EmployeesRouter extends Router {
       Employee.findByIdAndUpdate(req.params.id, req.body, options).then(
         employee => {
           if (employee) {
-            resp.setHeader('Access-Control-Allow-Origin', '*');
             resp.json(employee)
             return next()
           }

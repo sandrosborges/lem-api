@@ -3,6 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const restify = require("restify");
 const environment_1 = require("../common/environment");
 const mongoose = require("mongoose");
+const corsMiddleware = require("restify-cors-middleware");
+const cors = corsMiddleware({
+    origins: ["*"],
+    allowHeaders: ["Authorization"],
+    exposeHeaders: ["Authorization"]
+});
 class Server {
     initializeDB() {
         mongoose.Promise = global.Promise;
@@ -19,6 +25,8 @@ class Server {
                 });
                 this.application.use(restify.plugins.queryParser());
                 this.application.use(restify.plugins.bodyParser());
+                this.application.pre(cors.preflight);
+                this.application.use(cors.actual);
                 //routes
                 for (let route of routers) {
                     route.applyRoutes(this.application);
