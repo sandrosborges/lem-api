@@ -9,14 +9,18 @@ export interface Employee extends mongoose.Document {
 const employeeSchema = new mongoose.Schema({
 
   name: {
-    type: String
+    type: String,
+    required: true
   },
   email: {
     type: String,
-    unique: true
+    unique: true,
+    required: true,
+    match: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
   },
   department: {
-    type: String
+    type: String,
+    required: true
   }
 })
 
