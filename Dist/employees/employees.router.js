@@ -55,6 +55,17 @@ class EmployeesRouter extends router_1.Router {
                 }
             }).catch(next);
         });
+        application.del('/employees/:id', (req, resp, next) => {
+            employees_model_1.Employee.remove({ _id: req.params.id }).exec().then((cmdResult) => {
+                if (cmdResult.result.n) {
+                    resp.send(204);
+                }
+                else {
+                    resp.send(404);
+                }
+                return next();
+            }).catch(next);
+        });
     }
 }
 exports.employeesRouter = new EmployeesRouter();

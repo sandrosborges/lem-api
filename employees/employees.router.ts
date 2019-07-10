@@ -33,6 +33,7 @@ class EmployeesRouter extends Router {
         resp.json(employee)
         return next()
       }).catch(next)
+       
     })
 
     application.put('/employees/:id', (req, resp, next) => {     
@@ -60,6 +61,21 @@ class EmployeesRouter extends Router {
             return next()
           }
           else { resp.send(404) }
+        }
+      ).catch(next)
+    })
+
+   
+    application.del('/employees/:id', (req, resp, next) => {
+
+      Employee.remove({_id:req.params.id}).exec().then(
+        (cmdResult:any) => {
+          if (cmdResult.result.n){
+            resp.send(204)
+          }
+          else{ resp.send(404)}
+
+          return next()
         }
       ).catch(next)
     })
